@@ -1342,7 +1342,7 @@
                           <a aria-current="page" class="" href="/">Home</a>
                         </li>
                         <li class="useful-link">
-                          <a href="/contact/">Contact</a>
+                          <a href="/contact.html">Contact</a>
                         </li>
 
                         <li>
@@ -1443,50 +1443,44 @@
           aria-live="assertive"
           aria-atomic="true"
         >
-          Navigated to trinhminhtriet.com
+          Navigated to haseebportfolio-ten.vercel.app
         </div>
       </div>
-      <script async="" src="https://www.googletagmanager.com"></script>
+
+      <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
       <script>
-        window.excludeGtagPaths = [/^(?:\/preview\/(?:(?!(?:\/|^)\.).)*?)$/];
+        document
+          .getElementById("contact-form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
 
-        if (!(navigator.doNotTrack == "1" || window.doNotTrack == "1")) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag("js", new Date());
+            const name = document.getElementById("form_name").value.trim();
+            const phone = document.getElementById("form_phone").value.trim();
+            const email = document.getElementById("form_email").value.trim();
+            const message = document
+              .getElementById("form_message")
+              .value.trim();
 
-          gtag("config", "G-Y71R0VBFEJ", { send_page_view: false });
-        }
+            if (!name || !email || !message) {
+              alert("Please fill out all required fields.");
+              return;
+            }
+
+            // Proceed with sending the email
+
+            emailjs.send("service_rif4f8t", "template_bb7ylq6", this).then(
+              function (response) {
+                alert("Email sent successfully!");
+                console.log("SUCCESS:", response);
+              },
+              function (error) {
+                alert("Error occurred while sending email.");
+                console.error("ERROR DETAILS:", error);
+              }
+            );
+          });
       </script>
-
-<script>
-    // Initialize EmailJS
-    emailjs.init("NzHkhd8xb_Z6wi0rkjjJJ");  // Replace with your EmailJS user ID
-  
-    // Handle the form submission
-    document.getElementById("contact-form").addEventListener("submit", function(event) {
-      event.preventDefault();  // Prevent the form from submitting the traditional way
-  
-      // Get the form data
-      const formData = new FormData(this);
-      const formObject = {};
-      formData.forEach((value, key) => {
-        formObject[key] = value;
-      });
-  
-      // Send email using EmailJS
-      emailjs.sendForm("service_rif4f8t", "template_bb7ylq6", this)
-        .then(function(response) {
-          alert('Email sent successfully!');
-          console.log(response);
-        }, function(error) {
-          alert('Error occurred while sending email.');
-          console.log(error);
-        });
-    });
-  </script>
       <script id="gatsby-script-loader">
         /*<![CDATA[*/ window.pagePath = "/"; /*]]>*/
       </script>
@@ -1502,7 +1496,7 @@
       <script src="/framework-25cda8b64d2c79a70917.js" async=""></script>
       <script src="/app-ffec5f8b0839cab9bcfc.js" async=""></script>
       <!-- slice-end id="_gatsby-scripts-1" -->
-      <div id="veepn-breach-alert"></div>
+      <div id="veepn-breach-alert"></div> 
       <style>
         @font-face {
           font-family: FigtreeVF;
