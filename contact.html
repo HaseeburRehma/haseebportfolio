@@ -1448,8 +1448,9 @@
       </div>
 
       <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
       <script>
+        emailjs.init("pKHIxDiWnz0xpgGLk");
+
         document
           .getElementById("contact-form")
           .addEventListener("submit", function (event) {
@@ -1467,20 +1468,26 @@
               return;
             }
 
-            // Proceed with sending the email
-
-            emailjs.send("service_rif4f8t", "template_bb7ylq6", this).then(
-              function (response) {
-                alert("Email sent successfully!");
-                console.log("SUCCESS:", response);
-              },
-              function (error) {
-                alert("Error occurred while sending email.");
-                console.error("ERROR DETAILS:", error);
-              }
-            );
+            emailjs
+              .send("service_rif4f8t", "template_bb7ylq6", {
+                name: name,
+                phone: phone,
+                email: email,
+                message: message,
+              })
+              .then(
+                function (response) {
+                  alert("Email sent successfully!");
+                  console.log("SUCCESS:", response);
+                },
+                function (error) {
+                  alert("Error occurred while sending email.");
+                  console.error("ERROR DETAILS:", error);
+                }
+              );
           });
       </script>
+
       <script id="gatsby-script-loader">
         /*<![CDATA[*/ window.pagePath = "/"; /*]]>*/
       </script>
@@ -1496,7 +1503,7 @@
       <script src="/framework-25cda8b64d2c79a70917.js" async=""></script>
       <script src="/app-ffec5f8b0839cab9bcfc.js" async=""></script>
       <!-- slice-end id="_gatsby-scripts-1" -->
-      <div id="veepn-breach-alert"></div> 
+      <div id="veepn-breach-alert"></div>
       <style>
         @font-face {
           font-family: FigtreeVF;

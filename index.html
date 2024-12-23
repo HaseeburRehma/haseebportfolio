@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -1063,6 +1062,10 @@
     <link rel="stylesheet" href="/css/pe-icon.min.css" />
     <link rel="stylesheet" href="/css/Pe-icon-7-stroke.css" />
     <link rel="stylesheet" href="/css/animate.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
 
     <link
       rel="stylesheet"
@@ -1076,6 +1079,13 @@
       https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
     <link rel="stylesheet" href="/css/dark.css" />
     <link rel="stylesheet" href="/css/t.css" />
@@ -1106,10 +1116,11 @@
         <div class="mouse-cursor cursor-inner"></div>
         <nav class="navbar navbar-expand-lg change">
           <div class="container">
-            <a aria-current="page" class="logo" href="/"
-              ><img src="/images/logo.png" alt="haseeb.com" />
-              <h1 class="logo-name">HASEEBURREHMAN</h1></a
-            ><button
+            <a aria-current="page" class="logo" href="/">
+              <img src="/images/logo.png" alt="haseeb.com" />
+              <h1 class="logo-name">HASEEBURREHMAN</h1>
+            </a>
+            <button
               class="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -2198,6 +2209,9 @@
 
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
 
     <!-- Swiper Initialization -->
     <script>
@@ -2214,13 +2228,23 @@
           invert: false,
         },
         on: {
+          // Trigger animations for the first slide on initialization
+          init: function () {
+            const firstSlide = this.slides[this.activeIndex];
+            const background = firstSlide.querySelector(".background");
+            if (background) {
+              background.classList.add("animation");
+            }
+          },
           slideChangeTransitionEnd: function () {
+            // Remove animation classes from all slides
             this.slides.forEach((slide) => {
               const background = slide.querySelector(".background");
               if (background) {
                 background.classList.remove("animation");
               }
             });
+            // Add animation class to the active slide
             const activeSlide = this.slides[this.activeIndex];
             const background = activeSlide.querySelector(".background");
             if (background) {
@@ -2229,7 +2253,41 @@
           },
         },
       });
+
+      // Initialize Swiper
+      swiper.init();
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const navbarToggler = document.querySelector(".navbar-toggler");
+        const navbarCollapse = document.querySelector(
+          "#navbarSupportedContent"
+        );
+
+        if (navbarToggler && navbarCollapse) {
+          navbarToggler.addEventListener("click", () => {
+            // Toggle the "show" class on the collapse element
+            navbarCollapse.classList.toggle("show");
+
+            // Toggle the "aria-expanded" attribute
+            const isExpanded =
+              navbarToggler.getAttribute("aria-expanded") === "true";
+            navbarToggler.setAttribute("aria-expanded", !isExpanded);
+          });
+        } else {
+          console.error("Navbar toggler or collapse element not found.");
+        }
+      });
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        $(".navbar-toggler").click(function () {
+          $("#navbarSupportedContent").toggleClass("show");
+        });
+      });
+    </script>
+
     <style>
       @font-face {
         font-family: FigtreeVF;
